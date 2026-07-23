@@ -21,3 +21,22 @@ npm install
 
 4. Run the project:
 npm run dev
+## Screenshots
+
+### Register Page
+![Register Page](screenshots/register.png)
+
+### Home Page
+![Home Page](screenshots/home.png)
+
+### Products Page
+![Products Page](screenshots/products.png)
+
+![Products Page 2](screenshots/products2.png)
+
+![Products Page 3](screenshots/products3.png)
+
+### Cart Page
+![Cart Page](screenshots/cart.png)
+
+![Cart Page 2](screenshots/cart2.png)
