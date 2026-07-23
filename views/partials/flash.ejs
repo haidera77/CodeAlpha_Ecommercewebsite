@@ -1,0 +1,15 @@
+<% if (success && success.length > 0) { %>
+  <div class="alert alert-success">
+    <i class="fas fa-check-circle"></i>
+    <span><%= success[0] %></span>
+    <button class="close-btn">&times;</button>
+  </div>
+<% } %>
+
+<% if (error && error.length > 0) { %>
+  <div class="alert alert-error">
+    <i class="fas fa-exclamation-circle"></i>
+    <span><%= error[0] %></span>
+    <button class="close-btn">&times;</button>
+  </div>
+<% } %>

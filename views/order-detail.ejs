@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="page-header">
+    <h1>Order #<%= order._id.toString().slice(-8) %></h1>
+  </div>
+  
+  <div class="order-detail-content">
+    <div class="order-info">
+      <div class="info-card">
+        <h3>Order Information</h3>
+        <div class="info-row">
+          <span>Order Date:</span>
+          <span><%= order.orderDate.toLocaleDateString() %></span>
+        </div>
+        <div class="info-row">
+          <span>Status:</span>
+          <span class="status status-<%= order.status.toLowerCase() %>"><%= order.status %></span>
+        </div>
+        <div class="info-row">
+          <span>Payment Method:</span>
+          <span><%= order.paymentMethod %></span>
+        </div>
+      </div>
+      
+      <div class="info-card">
+        <h3>Shipping Address</h3>
+        <p><strong><%= order.shippingAddress.fullName %></strong></p>
+        <p><%= order.shippingAddress.address %></p>
+        <p><%= order.shippingAddress.city %>, <%= order.shippingAddress.state %> <%= order.shippingAddress.zipCode %></p>
+        <p><i class="fas fa-phone"></i> <%= order.shippingAddress.phone %></p>
+      </div>
+    </div>
+    
+    <div class="order-items-detail">
+      <h3>Order Items</h3>
+      <div class="items-list">
+        <% order.items.forEach(item => { %>
+          <div class="item-row">
+            <img src="<%= item.image %>" alt="<%= item.name %>">
+            <div class="item-info">
+              <h4><%= item.name %></h4>
+              <p>Quantity: <%= item.quantity %></p>
+              <p>Price: $<%= item.price.toFixed(2) %></p>
+            </div>
+            <div class="item-total">
+              $<%= (item.price * item.quantity).toFixed(2) %>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+      
+      <div class="order-totals">
+        <div class="total-row">
+          <span>Subtotal:</span>
+          <span>$<%= order.subtotal.toFixed(2) %></span>
+        </div>
+        <div class="total-row">
+          <span>Shipping:</span>
+          <span><%= order.shipping === 0 ? 'FREE' : '$' + order.shipping.toFixed(2) %></span>
+        </div>
+        <div class="total-row">
+          <span>Tax:</span>
+          <span>$<%= order.tax.toFixed(2) %></span>
+        </div>
+        <div class="total-row grand-total">
+          <span>Total:</span>
+          <span>$<%= order.total.toFixed(2) %></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

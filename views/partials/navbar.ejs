@@ -1,0 +1,79 @@
+<nav class="navbar">
+  <div class="container">
+    <div class="nav-wrapper">
+      <a href="/" class="logo">
+        <i class="fas fa-shopping-bag"></i>
+        <span>CartVerse</span>
+      </a>
+
+      <!-- <div class="search-bar">
+        <form action="/products" method="GET">
+          <input type="text" name="search" placeholder="Search products..." value="<%= search || '' %>">
+          <button type="submit"><i class="fas fa-search"></i></button>
+        </form>
+      </div> -->
+      <div class="search-bar-wrapper">
+        <form action="/products" method="GET" class="search-bar" id="searchForm">
+          <input type="text" name="search" id="searchInput" placeholder="Search products..." value="<%= search || '' %>"
+            autocomplete="off">
+          <button type="submit"><i class="fas fa-search"></i></button>
+        </form>
+        <div id="searchSuggestions" class="suggestions-dropdown"></div>
+      </div>
+
+      <div class="nav-links">
+        <a href="/products" class="nav-link">
+          <i class="fas fa-store"></i>
+          <span>Products</span>
+        </a>
+
+        <a href="/cart" class="nav-link cart-link">
+          <i class="fas fa-shopping-cart"></i>
+          <span>Cart</span>
+          <% if (cartCount> 0) { %>
+            <span class="cart-badge">
+              <%= cartCount %>
+            </span>
+            <% } %>
+        </a>
+
+        <% if (currentUser) { %>
+          <a href="/orders" class="nav-link">
+            <i class="fas fa-box"></i>
+            <span>Orders</span>
+          </a>
+
+          <% if (currentUser.role==='admin' ) { %>
+            <a href="/products/admin/all" class="nav-link">
+              <i class="fas fa-cog"></i>
+              <span>Admin</span>
+            </a>
+            <% } %>
+
+              <div class="user-menu">
+                <button class="user-btn">
+                  <i class="fas fa-user-circle"></i>
+                  <span>
+                    <%= currentUser.name %>
+                  </span>
+                  <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="dropdown">
+                  <a href="/orders"><i class="fas fa-box"></i> My Orders</a>
+                  <a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
+              </div>
+              <% } else { %>
+                <a href="/login" class="nav-link">
+                  <i class="fas fa-sign-in-alt"></i>
+                  <span>Login</span>
+                </a>
+                <a href="/register" class="btn btn-primary">
+                  <i class="fas fa-user-plus"></i>
+                  <span>Register</span>
+                </a>
+                <% } %>
+      </div>
+    </div>
+  </div>
+</nav>

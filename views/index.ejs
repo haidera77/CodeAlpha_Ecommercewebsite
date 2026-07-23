@@ -1,0 +1,191 @@
+<section class="hero">
+  <div class="hero-content">
+    <h1>Welcome to CartVerse</h1>
+    <p>Discover amazing products at unbeatable prices</p>
+    <a href="/products" class="btn btn-primary btn-lg">
+      <i class="fas fa-shopping-bag"></i>
+      Shop Now
+    </a>
+  </div>
+</section>
+
+<!-- <section class="categories-section">
+  <div class="container">
+    <h2>Shop by Category</h2>
+    <div class="categories-grid">
+      <% categories.forEach(cat => { %>
+        <a href="/products?category=<%= cat %>" class="category-card">
+          <i class="fas fa-tag"></i>
+          <h3><%= cat %></h3>
+        </a>
+      <% }) %>
+    </div>
+  </div>
+</section> -->
+<section class="categories-section">
+  <div class="container">
+    <h2>Shop by Category</h2>
+    <div class="categories-grid">
+      <!-- Electronics -->
+      <a href="/products?category=Electronics" class="category-card">
+        <div class="category-image">
+          <img src="https://images.unsplash.com/photo-1707438095940-1eee18e85400?q=80&w=1331&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt="Electronics">"
+          alt="Electronics">
+        </div>
+        <div class="category-overlay">
+          <i class="fas fa-laptop"></i>
+        </div>
+        <h3>Electronics</h3>
+      </a>
+
+      <!-- Fashion -->
+      <a href="/products?category=Fashion" class="category-card">
+        <div class="category-image">
+          <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?w=400&h=300&fit=crop" alt="Fashion">
+        </div>
+        <div class="category-overlay">
+          <i class="fas fa-tshirt"></i>
+        </div>
+        <h3>Fashion</h3>
+      </a>
+
+      <!-- Home & Kitchen -->
+      <a href="/products?category=Home & Kitchen" class="category-card">
+        <div class="category-image">
+          <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?w=400&h=300&fit=crop"
+            alt="Home & Kitchen">
+        </div>
+        <div class="category-overlay">
+          <i class="fas fa-home"></i>
+        </div>
+        <h3>Home & Kitchen</h3>
+      </a>
+
+      <!-- Sports -->
+      <a href="/products?category=Sports" class="category-card">
+        <div class="category-image">
+          <img src="https://images.unsplash.com/photo-1517649763962-0c623066013b?w=400&h=300&fit=crop" alt="Sports">
+        </div>
+        <div class="category-overlay">
+          <i class="fas fa-dumbbell"></i>
+        </div>
+        <h3>Sports</h3>
+      </a>
+
+      <!-- Books -->
+      <a href="/products?category=Books" class="category-card">
+        <div class="category-image">
+          <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=400&h=300&fit=crop" alt="Books">
+        </div>
+        <div class="category-overlay">
+          <i class="fas fa-book"></i>
+        </div>
+        <h3>Books</h3>
+      </a>
+
+      <!-- Beauty -->
+      <a href="/products?category=Beauty" class="category-card">
+        <div class="category-image">
+          <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400&h=300&fit=crop" alt="Beauty">
+        </div>
+        <div class="category-overlay">
+          <i class="fas fa-spa"></i>
+        </div>
+        <h3>Beauty</h3>
+      </a>
+
+      <!-- Toys -->
+      <a href="/products?category=Toys" class="category-card">
+        <div class="category-image">
+          <img src="https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=400&h=300&fit=crop" alt="Toys">
+        </div>
+        <div class="category-overlay">
+          <i class="fas fa-gamepad"></i>
+        </div>
+        <h3>Toys</h3>
+      </a>
+
+      <!-- Other -->
+      <a href="/products?category=Other" class="category-card">
+        <div class="category-image">
+          <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?w=400&h=300&fit=crop" alt="Other">
+        </div>
+        <div class="category-overlay">
+          <i class="fas fa-shopping-bag"></i>
+        </div>
+        <h3>Other</h3>
+      </a>
+    </div>
+  </div>
+</section>
+
+<% if (featuredProducts.length> 0) { %>
+  <section class="products-section">
+    <div class="container">
+      <h2>Featured Products</h2>
+      <div class="products-grid">
+        <% featuredProducts.forEach(product=> { %>
+          <div class="product-card">
+            <div class="product-image">
+              <img src="<%= product.image %>" alt="<%= product.name %>">
+              <% if (product.stock===0) { %>
+                <span class="badge badge-out">Out of Stock</span>
+                <% } else if (product.featured) { %>
+                  <span class="badge badge-featured">Featured</span>
+                  <% } %>
+            </div>
+            <div class="product-info">
+              <h3>
+                <%= product.name %>
+              </h3>
+              <div class="product-rating">
+                <% for (let i=1; i <=5; i++) { %>
+                  <i class="fas fa-star <%= i <= product.rating ? 'filled' : '' %>"></i>
+                  <% } %>
+                    <span>(<%= product.reviews %>)</span>
+              </div>
+              <div class="product-price">
+                <span class="price">$<%= product.price.toFixed(2) %></span>
+              </div>
+              <a href="/products/<%= product._id %>" class="btn btn-primary">View Details</a>
+            </div>
+          </div>
+          <% }) %>
+      </div>
+    </div>
+  </section>
+  <% } %>
+
+    <% if (newProducts.length> 0) { %>
+      <section class="products-section">
+        <div class="container">
+          <h2>New Arrivals</h2>
+          <div class="products-grid">
+            <% newProducts.forEach(product=> { %>
+              <div class="product-card">
+                <div class="product-image">
+                  <img src="<%= product.image %>" alt="<%= product.name %>">
+                  <span class="badge badge-new">New</span>
+                </div>
+                <div class="product-info">
+                  <h3>
+                    <%= product.name %>
+                  </h3>
+                  <div class="product-rating">
+                    <% for (let i=1; i <=5; i++) { %>
+                      <i class="fas fa-star <%= i <= product.rating ? 'filled' : '' %>"></i>
+                      <% } %>
+                        <span>(<%= product.reviews %>)</span>
+                  </div>
+                  <div class="product-price">
+                    <span class="price">$<%= product.price.toFixed(2) %></span>
+                  </div>
+                  <a href="/products/<%= product._id %>" class="btn btn-primary">View Details</a>
+                </div>
+              </div>
+              <% }) %>
+          </div>
+        </div>
+      </section>
+      <% } %>

@@ -1,0 +1,111 @@
+<div class="container">
+  <div class="admin-header">
+    <h1>Admin Dashboard</h1>
+    <div>
+      <a href="/products/admin/new" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Add Product
+      </a>
+    </div>
+  </div>
+  
+  <div class="admin-stats">
+    <div class="stat-card">
+      <div class="stat-icon blue">
+        <i class="fas fa-box"></i>
+      </div>
+      <div class="stat-info">
+        <h3><%= stats.totalProducts %></h3>
+        <p>Total Products</p>
+      </div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-icon green">
+        <i class="fas fa-users"></i>
+      </div>
+      <div class="stat-info">
+        <h3><%= stats.totalUsers %></h3>
+        <p>Total Users</p>
+      </div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-icon orange">
+        <i class="fas fa-shopping-cart"></i>
+      </div>
+      <div class="stat-info">
+        <h3><%= stats.totalOrders %></h3>
+        <p>Total Orders</p>
+      </div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-icon red">
+        <i class="fas fa-dollar-sign"></i>
+      </div>
+      <div class="stat-info">
+        <h3>$<%= stats.totalRevenue.toFixed(2) %></h3>
+        <p>Total Revenue</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="admin-table">
+    <table>
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Category</th>
+          <th>Price</th>
+          <th>Stock</th>
+          <th>Rating</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% products.forEach(product => { %>
+          <tr>
+            <td>
+              <div style="display: flex; align-items: center; gap: 1rem;">
+                <img src="<%= product.image %>" alt="<%= product.name %>">
+                <div>
+                  <strong><%= product.name %></strong>
+                  <% if (product.featured) { %>
+                    <span class="badge badge-featured" style="position: static; margin-left: 0.5rem;">Featured</span>
+                  <% } %>
+                </div>
+              </div>
+            </td>
+            <td><%= product.category %></td>
+            <td>$<%= product.price.toFixed(2) %></td>
+            <td>
+              <% if (product.stock === 0) { %>
+                <span style="color: var(--danger-color); font-weight: 600;">Out of Stock</span>
+              <% } else if (product.stock < 10) { %>
+                <span style="color: var(--warning-color); font-weight: 600;"><%= product.stock %></span>
+              <% } else { %>
+                <span style="color: var(--success-color); font-weight: 600;"><%= product.stock %></span>
+              <% } %>
+            </td>
+            <td>
+              <i class="fas fa-star" style="color: #fbbf24;"></i>
+              <%= product.rating %> (<%= product.reviews %>)
+            </td>
+            <td>
+              <div class="action-btns">
+                <a href="/products/admin/<%= product._id %>/edit" class="btn btn-small btn-primary">
+                  <i class="fas fa-edit"></i>
+                </a>
+                <form action="/products/admin/<%= product._id %>/delete" method="POST" style="display: inline;">
+                  <button type="submit" class="btn btn-small btn-danger" onclick="return confirm('Delete this product?')">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </form>
+              </div>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</div>

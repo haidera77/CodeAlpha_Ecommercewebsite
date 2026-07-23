@@ -1,0 +1,74 @@
+<div class="container">
+  <div class="page-header">
+    <h1>All Products</h1>
+    <% if (search) { %>
+      <p style="color: var(--text-light); margin-top: 0.5rem;">
+        Search results for: "<strong><%= search %></strong>"
+        <a href="/products" style="color: var(--primary-color); margin-left: 10px;">Clear Search</a>
+      </p>
+    <% } %>
+  </div>
+  
+  <div class="filter-bar">
+    <form action="/products" method="GET" class="filter-form">
+      <div class="filter-group">
+        <label>Category:</label>
+        <select name="category" onchange="this.form.submit()">
+          <option value="all">All Categories</option>
+          <% categories.forEach(cat => { %>
+            <option value="<%= cat %>" <%= currentCategory === cat ? 'selected' : '' %>><%= cat %></option>
+          <% }) %>
+        </select>
+      </div>
+      
+      <div class="filter-group">
+        <label>Sort by:</label>
+        <select name="sort" onchange="this.form.submit()">
+          <option value="newest" <%= sort === 'newest' || !sort ? 'selected' : '' %>>Newest</option>
+          <option value="price-low" <%= sort === 'price-low' ? 'selected' : '' %>>Price: Low to High</option>
+          <option value="price-high" <%= sort === 'price-high' ? 'selected' : '' %>>Price: High to Low</option>
+          <option value="rating" <%= sort === 'rating' ? 'selected' : '' %>>Top Rated</option>
+        </select>
+      </div>
+    </form>
+  </div>
+  
+  <% if (products.length === 0) { %>
+    <div class="empty-state">
+      <i class="fas fa-search"></i>
+      <h3>No products found</h3>
+      <p>Try different keywords or browse all categories</p>
+      <a href="/products" class="btn btn-primary">Browse All Products</a>
+    </div>
+  <% } else { %>
+    <div class="products-grid">
+      <% products.forEach(product => { %>
+        <div class="product-card">
+          <div class="product-image">
+            <img src="<%= product.image %>" alt="<%= product.name %>">
+            <% if (product.stock === 0) { %>
+              <span class="badge badge-out">Out of Stock</span>
+            <% } else if (product.featured) { %>
+              <span class="badge badge-featured">Featured</span>
+            <% } %>
+          </div>
+          <div class="product-info">
+            <span class="category"><%= product.category %></span>
+            <h3><%= product.name %></h3>
+            <div class="product-rating">
+              <% for (let i = 1; i <= 5; i++) { %>
+                <i class="fas fa-star <%= i <= product.rating ? 'filled' : '' %>"></i>
+              <% } %>
+              <span>(<%= product.reviews %>)</span>
+            </div>
+            <div class="product-price">
+              <span class="price">$<%= product.price.toFixed(2) %></span>
+              <span class="stock"><%= product.stock %> in stock</span>
+            </div>
+            <a href="/products/<%= product._id %>" class="btn btn-primary">View Details</a>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  <% } %>
+</div>
