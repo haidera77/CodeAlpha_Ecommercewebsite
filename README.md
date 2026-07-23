@@ -1,6 +1,6 @@
 # full stack ecommerce website 
 Website Name is:
-#CartVerse
+CartVerse
 
 frontend include : HTML CSS JavaScript
 Backend include: Express js Node js and ejs 
